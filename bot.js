@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('./config.js');
 const command = require('./functions');
 const client = new Discord.Client();
 
@@ -18,9 +18,9 @@ client.on('ready', () => {
 
 client.on('message', message => {
   // Prevents bot from anwser his own message
-  if(message.author.bot) return;
-  
-  if(message.content.startsWith(prefix)) {
+  if (message.author.bot) return;
+
+  if (message.content.startsWith(prefix)) {
     command.execute(message);
   }
 })

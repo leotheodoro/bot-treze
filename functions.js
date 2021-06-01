@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('./config.js');
 
 function execute(message) {
   let fullCmd = message.content.substr(1); // Remove prefix
@@ -7,7 +7,7 @@ function execute(message) {
   let cmd = splitCmd[0];
   let args = splitCmd.slice(1);
 
-  switch(cmd) {
+  switch (cmd) {
     case 'missa':
       // code...
       break;
@@ -19,6 +19,17 @@ function execute(message) {
         message.channel.send(`${member.user.username} vai joga missa `)
       });
       break;
+    case 'lan':
+      const voiceChannel = message.member.voice.channel;
+
+      voiceChannel.join().then(connection => {
+        const dispatcher = connection.play('./lan.mp3');
+
+        dispatcher.on('end', end => {
+          voiceChannel.leave();
+        })
+      }).catch(err => console.log(err));
+      break;
     default:
       message.channel.send('Nathan o desgraçado não entendeu o que você quis dizer, tente usar o comando `+help`');
   }
@@ -26,7 +37,7 @@ function execute(message) {
 
 function missionarios(members) {
   members.map(member => {
-    
+
   });
 }
 
